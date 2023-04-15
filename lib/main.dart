@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ki_flutter_2023/column_screen.dart';
-import 'package:ki_flutter_2023/row_screen.dart';
+import 'package:ki_flutter_2023/auth/login_screen.dart';
+import 'package:ki_flutter_2023/example/button_screen.dart';
+import 'package:ki_flutter_2023/example/column_screen.dart';
+import 'package:ki_flutter_2023/example/field_screen.dart';
+import 'package:ki_flutter_2023/example/image_screen.dart';
+import 'package:ki_flutter_2023/example/row_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,11 +22,15 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: '/login',
       routes: {
         '/': (context) => const MyHomePage(title: 'Teks Title'),
         '/column': (context) => const ColumnScreen(),
-        '/row': (context) => const RowScreen()
+        '/row': (context) => const RowScreen(),
+        '/image': (context) => const ImageScreen(),
+        '/field': (context) => const FieldScreen(),
+        '/button': (context) => const ButtonScreen(),
+        '/login': (context) => const LoginScreen(),
       },
     );
   }
