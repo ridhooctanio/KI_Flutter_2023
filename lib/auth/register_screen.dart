@@ -2,26 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   bool _obscureText = true;
+  bool _reObscureText = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Login',
-          style: TextStyle(
-            fontFamily: 'Anuphan',
-          ),
-        ),
+        title: Text('Register'),
         automaticallyImplyLeading: false,
       ),
       body: Container(
@@ -33,6 +29,15 @@ class _LoginScreenState extends State<LoginScreen> {
               image: AssetImage('assets/images/img-ki.png'),
             ),
             SizedBox(height: 32),
+            TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.person),
+                labelText: 'Enter your name',
+                hintText: 'Fill here',
+              ),
+            ),
+            SizedBox(height: 8),
             TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
@@ -57,6 +62,26 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   icon: Icon(
                     _obscureText ? Icons.visibility : Icons.visibility_off,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 8),
+            TextField(
+              obscureText: _reObscureText,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.lock),
+                labelText: 'Re Enter your password',
+                hintText: 'Fill here',
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _reObscureText = !_reObscureText;
+                    });
+                  },
+                  icon: Icon(
+                    _reObscureText ? Icons.visibility : Icons.visibility_off,
                   ),
                 ),
               ),

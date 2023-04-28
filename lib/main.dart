@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ki_flutter_2023/auth/login_screen.dart';
+import 'package:ki_flutter_2023/auth/register_screen.dart';
 import 'package:ki_flutter_2023/example/button_screen.dart';
 import 'package:ki_flutter_2023/example/column_screen.dart';
 import 'package:ki_flutter_2023/example/field_screen.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/login',
+      initialRoute: '/register',
       routes: {
         '/': (context) => const MyHomePage(title: 'Teks Title'),
         '/column': (context) => const ColumnScreen(),
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         '/field': (context) => const FieldScreen(),
         '/button': (context) => const ButtonScreen(),
         '/login': (context) => const LoginScreen(),
+        '/register': (context) => const RegisterScreen(),
       },
     );
   }
