@@ -3,8 +3,11 @@ import 'package:ki_flutter_2023/auth/login_screen.dart';
 import 'package:ki_flutter_2023/auth/register_screen.dart';
 import 'package:ki_flutter_2023/example/button_screen.dart';
 import 'package:ki_flutter_2023/example/column_screen.dart';
+import 'package:ki_flutter_2023/example/custom_screen.dart';
 import 'package:ki_flutter_2023/example/field_screen.dart';
+import 'package:ki_flutter_2023/example/grid_screen.dart';
 import 'package:ki_flutter_2023/example/image_screen.dart';
+import 'package:ki_flutter_2023/example/list_view_screen.dart';
 import 'package:ki_flutter_2023/example/row_screen.dart';
 
 void main() {
@@ -23,7 +26,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/register',
+      initialRoute: '/gridView',
       routes: {
         '/': (context) => const MyHomePage(title: 'Teks Title'),
         '/column': (context) => const ColumnScreen(),
@@ -33,6 +36,9 @@ class MyApp extends StatelessWidget {
         '/button': (context) => const ButtonScreen(),
         '/login': (context) => const LoginScreen(),
         '/register': (context) => const RegisterScreen(),
+        '/customScroll': (context) => const CustomScrollScreen(),
+        '/listView': (context) => const ListViewScreen(),
+        '/gridView': (context) => const GridScreen(),
       },
     );
   }

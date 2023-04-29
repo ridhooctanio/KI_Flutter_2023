@@ -9,13 +9,13 @@ class ButtonScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Button'),
+        title: const Text('Button'),
       ),
       body: Column(
         children: [
           ElevatedButton(
             onPressed: () {},
-            child: Text('Submit'),
+            child: const Text('Submit'),
           ),
         ],
       ),

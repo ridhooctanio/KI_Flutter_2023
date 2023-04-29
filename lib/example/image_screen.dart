@@ -9,7 +9,7 @@ class ImageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Image'),
+        title: const Text('Image'),
       ),
       body: Column(
         children: [
@@ -17,7 +17,7 @@ class ImageScreen extends StatelessWidget {
             height: 200,
             width: 200,
             color: Colors.grey,
-            child: Image(
+            child: const Image(
               fit: BoxFit.cover,
               alignment: Alignment.topCenter,
               image: AssetImage('assets/images/bali.jpg'),
@@ -28,10 +28,10 @@ class ImageScreen extends StatelessWidget {
               if (loadingProgress == null) {
                 return child;
               } else {
-                return Text('Loading ...');
+                return const Text('Loading ...');
               }
             },
-            image: NetworkImage(
+            image: const NetworkImage(
                 'https://a.cdn-hotels.com/gdcs/production143/d1112/c4fedab1-4041-4db5-9245-97439472cf2c.jpg'),
           )
         ],

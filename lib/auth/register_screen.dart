@@ -17,19 +17,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Register'),
+        title: const Text('Register'),
         automaticallyImplyLeading: false,
       ),
       body: Container(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            Image(
+            const Image(
               height: 100,
               image: AssetImage('assets/images/img-ki.png'),
             ),
-            SizedBox(height: 32),
-            TextField(
+            const SizedBox(height: 32),
+            const TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.person),
@@ -37,8 +37,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 hintText: 'Fill here',
               ),
             ),
-            SizedBox(height: 8),
-            TextField(
+            const SizedBox(height: 8),
+            const TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.email),
@@ -46,12 +46,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 hintText: 'Fill here',
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             TextField(
               obscureText: _obscureText,
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.lock),
+                border: const OutlineInputBorder(),
+                prefixIcon: const Icon(Icons.lock),
                 labelText: 'Enter your password',
                 hintText: 'Fill here',
                 suffixIcon: IconButton(
@@ -66,12 +66,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             TextField(
               obscureText: _reObscureText,
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.lock),
+                border: const OutlineInputBorder(),
+                prefixIcon: const Icon(Icons.lock),
                 labelText: 'Re Enter your password',
                 hintText: 'Fill here',
                 suffixIcon: IconButton(
@@ -86,18 +86,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Container(
               height: 45,
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {},
-                child: Text('Login'),
+                child: const Text('Login'),
               ),
             ),
             TextButton(
               onPressed: () {},
-              child: Text('Register'),
+              child: const Text('Register'),
             ),
           ],
         ),

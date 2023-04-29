@@ -9,12 +9,12 @@ class FieldScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Field'),
+        title: const Text('Field'),
       ),
       body: Container(
-        padding: EdgeInsets.all(24),
+        padding: const EdgeInsets.all(24),
         child: Column(
-          children: [
+          children: const [
             TextField(
               decoration: InputDecoration(
                 border: UnderlineInputBorder(),

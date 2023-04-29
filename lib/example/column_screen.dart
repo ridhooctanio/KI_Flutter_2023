@@ -9,7 +9,7 @@ class ColumnScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Column',
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -20,12 +20,12 @@ class ColumnScreen extends StatelessWidget {
       body: Container(
         color: Colors.amber,
         height: 100,
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              child: Text(
+              child: const Text(
                 'Teks 1',
                 style: TextStyle(color: Colors.red),
               ),
@@ -34,11 +34,11 @@ class ColumnScreen extends StatelessWidget {
               children: [
                 Container(
                   color: Colors.lime,
-                  padding: EdgeInsets.all(8),
-                  margin: EdgeInsets.only(top: 8),
-                  child: Text('Teks 2'),
+                  padding: const EdgeInsets.all(8),
+                  margin: const EdgeInsets.only(top: 8),
+                  child: const Text('Teks 2'),
                 ),
-                Text('Teks 3')
+                const Text('Teks 3')
               ],
             ),
           ],

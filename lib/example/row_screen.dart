@@ -14,7 +14,7 @@ class _RowScreenState extends State<RowScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Row'),
+        title: const Text('Row'),
         backgroundColor: Colors.amber,
       ),
       body: Container(
@@ -22,7 +22,7 @@ class _RowScreenState extends State<RowScreen> {
         height: 40,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
+          children: const [
             Expanded(
               child: Text(
                 'Teks 1',
