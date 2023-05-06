@@ -3,10 +3,12 @@ import 'package:ki_flutter_2023/auth/login_screen.dart';
 import 'package:ki_flutter_2023/auth/register_screen.dart';
 import 'package:ki_flutter_2023/example/button_screen.dart';
 import 'package:ki_flutter_2023/example/column_screen.dart';
+import 'package:ki_flutter_2023/example/components/app_theme.dart';
 import 'package:ki_flutter_2023/example/custom_screen.dart';
 import 'package:ki_flutter_2023/example/field_screen.dart';
 import 'package:ki_flutter_2023/example/grid_screen.dart';
 import 'package:ki_flutter_2023/example/image_screen.dart';
+import 'package:ki_flutter_2023/example/list+style_screen.dart';
 import 'package:ki_flutter_2023/example/list_view_screen.dart';
 import 'package:ki_flutter_2023/example/row_screen.dart';
 
@@ -20,13 +22,27 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final lightTheme = AppLightTheme();
+    final darkTheme = AppDarkTheme();
     return MaterialApp(
       title: 'Flutter Demo',
+      themeMode: ThemeMode.system,
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        brightness: Brightness.light,
+        primarySwatch: lightTheme.primarySwatch,
+        appBarTheme: lightTheme.appBarTheme,
+        scaffoldBackgroundColor: lightTheme.scaffoldBackgroundColor,
+        floatingActionButtonTheme: lightTheme.floatingActionButtonTheme,
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        primarySwatch: darkTheme.primarySwatch,
+        appBarTheme: darkTheme.appBarTheme,
+        scaffoldBackgroundColor: darkTheme.scaffoldBackgroundColor,
+        floatingActionButtonTheme: darkTheme.floatingActionButtonTheme,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/gridView',
+      initialRoute: '/listWithStyle',
       routes: {
         '/': (context) => const MyHomePage(title: 'Teks Title'),
         '/column': (context) => const ColumnScreen(),
@@ -39,6 +55,7 @@ class MyApp extends StatelessWidget {
         '/customScroll': (context) => const CustomScrollScreen(),
         '/listView': (context) => const ListViewScreen(),
         '/gridView': (context) => const GridScreen(),
+        '/listWithStyle': (context) => const ListWithStyleScreen(),
       },
     );
   }
