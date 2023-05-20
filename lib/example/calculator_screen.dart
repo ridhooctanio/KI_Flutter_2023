@@ -50,40 +50,148 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            SizedBox(
-              width: double.infinity,
-              height: 45,
-              child: ElevatedButton(
-                onPressed: () {
-                  int? firstNumber;
-                  int? secondNumber;
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      int? firstNumber;
+                      int? secondNumber;
 
-                  if (controller1.text.isNotEmpty) {
-                    firstNumber = int.parse(controller1.text);
-                  }
+                      if (controller1.text.isNotEmpty) {
+                        firstNumber = int.parse(controller1.text);
+                      }
 
-                  if (controller2.text.isNotEmpty) {
-                    secondNumber = int.parse(controller2.text);
-                  }
+                      if (controller2.text.isNotEmpty) {
+                        secondNumber = int.parse(controller2.text);
+                      }
 
-                  if (firstNumber != null && secondNumber != null) {
-                    setState(() {
-                      total = firstNumber! + secondNumber!;
-                    });
-                  } else {
-                    setState(() {
-                      total = null;
-                    });
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Please fill first and second number'),
-                        duration: Duration(seconds: 1),
-                      ),
-                    );
-                  }
-                },
-                child: const Text('Jumlahkan'),
-              ),
+                      if (firstNumber != null && secondNumber != null) {
+                        setState(() {
+                          total = firstNumber! + secondNumber!;
+                        });
+                      } else {
+                        setState(() {
+                          total = null;
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content:
+                                Text('Please fill first and second number'),
+                            duration: Duration(seconds: 1),
+                          ),
+                        );
+                      }
+                    },
+                    child: const Text('+'),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      int? firstNumber;
+                      int? secondNumber;
+
+                      if (controller1.text.isNotEmpty) {
+                        firstNumber = int.parse(controller1.text);
+                      }
+
+                      if (controller2.text.isNotEmpty) {
+                        secondNumber = int.parse(controller2.text);
+                      }
+
+                      if (firstNumber != null && secondNumber != null) {
+                        setState(() {
+                          total = firstNumber! - secondNumber!;
+                        });
+                      } else {
+                        setState(() {
+                          total = null;
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content:
+                                Text('Please fill first and second number'),
+                            duration: Duration(seconds: 1),
+                          ),
+                        );
+                      }
+                    },
+                    child: const Text('-'),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      int? firstNumber;
+                      int? secondNumber;
+
+                      if (controller1.text.isNotEmpty) {
+                        firstNumber = int.parse(controller1.text);
+                      }
+
+                      if (controller2.text.isNotEmpty) {
+                        secondNumber = int.parse(controller2.text);
+                      }
+
+                      if (firstNumber != null && secondNumber != null) {
+                        setState(() {
+                          total = firstNumber! ~/ secondNumber!;
+                        });
+                      } else {
+                        setState(() {
+                          total = null;
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content:
+                                Text('Please fill first and second number'),
+                            duration: Duration(seconds: 1),
+                          ),
+                        );
+                      }
+                    },
+                    child: const Text('/'),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      int? firstNumber;
+                      int? secondNumber;
+
+                      if (controller1.text.isNotEmpty) {
+                        firstNumber = int.parse(controller1.text);
+                      }
+
+                      if (controller2.text.isNotEmpty) {
+                        secondNumber = int.parse(controller2.text);
+                      }
+
+                      if (firstNumber != null && secondNumber != null) {
+                        setState(() {
+                          total = firstNumber! * secondNumber!;
+                        });
+                      } else {
+                        setState(() {
+                          total = null;
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content:
+                                Text('Please fill first and second number'),
+                            duration: Duration(seconds: 1),
+                          ),
+                        );
+                      }
+                    },
+                    child: const Text('*'),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 32),
             Visibility(

@@ -13,6 +13,7 @@ import 'package:ki_flutter_2023/example/list+style_screen.dart';
 import 'package:ki_flutter_2023/example/list_view_screen.dart';
 import 'package:ki_flutter_2023/example/null_aware_screen.dart';
 import 'package:ki_flutter_2023/example/row_screen.dart';
+import 'package:ki_flutter_2023/example/shopping_list_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
         floatingActionButtonTheme: darkTheme.floatingActionButtonTheme,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/calculator',
+      initialRoute: '/shopping',
       routes: {
         '/': (context) => const MyHomePage(title: 'Teks Title'),
         '/column': (context) => const ColumnScreen(),
@@ -59,7 +60,8 @@ class MyApp extends StatelessWidget {
         '/gridView': (context) => const GridScreen(),
         '/listWithStyle': (context) => const ListWithStyleScreen(),
         '/safetyNull': (context) => NullAwareScreen(),
-        '/calculator': (context) => CalculatorScreen(),
+        '/calculator': (context) => const CalculatorScreen(),
+        '/shopping': (context) => const ShoppingListScreen(),
       },
     );
   }
