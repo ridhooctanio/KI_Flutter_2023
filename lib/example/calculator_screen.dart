@@ -15,6 +15,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   final controller2 = TextEditingController();
 
   int? total;
+  List<String> historyResult = [];
 
   @override
   Widget build(BuildContext context) {
@@ -54,159 +55,139 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               children: [
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {
-                      int? firstNumber;
-                      int? secondNumber;
-
-                      if (controller1.text.isNotEmpty) {
-                        firstNumber = int.parse(controller1.text);
-                      }
-
-                      if (controller2.text.isNotEmpty) {
-                        secondNumber = int.parse(controller2.text);
-                      }
-
-                      if (firstNumber != null && secondNumber != null) {
-                        setState(() {
-                          total = firstNumber! + secondNumber!;
-                        });
-                      } else {
-                        setState(() {
-                          total = null;
-                        });
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content:
-                                Text('Please fill first and second number'),
-                            duration: Duration(seconds: 1),
-                          ),
-                        );
-                      }
-                    },
+                    onPressed: () => operation(operator: '+'),
                     child: const Text('+'),
                   ),
                 ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {
-                      int? firstNumber;
-                      int? secondNumber;
-
-                      if (controller1.text.isNotEmpty) {
-                        firstNumber = int.parse(controller1.text);
-                      }
-
-                      if (controller2.text.isNotEmpty) {
-                        secondNumber = int.parse(controller2.text);
-                      }
-
-                      if (firstNumber != null && secondNumber != null) {
-                        setState(() {
-                          total = firstNumber! - secondNumber!;
-                        });
-                      } else {
-                        setState(() {
-                          total = null;
-                        });
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content:
-                                Text('Please fill first and second number'),
-                            duration: Duration(seconds: 1),
-                          ),
-                        );
-                      }
-                    },
+                    onPressed: () => operation(operator: '-'),
                     child: const Text('-'),
                   ),
                 ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {
-                      int? firstNumber;
-                      int? secondNumber;
-
-                      if (controller1.text.isNotEmpty) {
-                        firstNumber = int.parse(controller1.text);
-                      }
-
-                      if (controller2.text.isNotEmpty) {
-                        secondNumber = int.parse(controller2.text);
-                      }
-
-                      if (firstNumber != null && secondNumber != null) {
-                        setState(() {
-                          total = firstNumber! ~/ secondNumber!;
-                        });
-                      } else {
-                        setState(() {
-                          total = null;
-                        });
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content:
-                                Text('Please fill first and second number'),
-                            duration: Duration(seconds: 1),
-                          ),
-                        );
-                      }
-                    },
+                    onPressed: () => operation(operator: '/'),
                     child: const Text('/'),
                   ),
                 ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {
-                      int? firstNumber;
-                      int? secondNumber;
-
-                      if (controller1.text.isNotEmpty) {
-                        firstNumber = int.parse(controller1.text);
-                      }
-
-                      if (controller2.text.isNotEmpty) {
-                        secondNumber = int.parse(controller2.text);
-                      }
-
-                      if (firstNumber != null && secondNumber != null) {
-                        setState(() {
-                          total = firstNumber! * secondNumber!;
-                        });
-                      } else {
-                        setState(() {
-                          total = null;
-                        });
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content:
-                                Text('Please fill first and second number'),
-                            duration: Duration(seconds: 1),
-                          ),
-                        );
-                      }
-                    },
+                    onPressed: () => operation(operator: '*'),
                     child: const Text('*'),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 32),
+            Visibility(
+              visible: total != null,
+              child: const SizedBox(height: 16),
+            ),
             Visibility(
               visible: total != null,
               child: Text(
-                'Hasil ${controller1.text} + ${controller2.text} = $total',
+                'Hasil: $total',
                 style: const TextStyle(
                   fontSize: 21,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
+            Row(
+              children: [
+                const Expanded(child: Text('List History:')),
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      historyResult.clear();
+                    });
+                  },
+                  icon: const Icon(
+                    Icons.clear_all_outlined,
+                  ),
+                ),
+              ],
+            ),
+            Expanded(
+              child: ListView.separated(
+                separatorBuilder: (context, index) => const Divider(),
+                itemCount: historyResult.length,
+                itemBuilder: (context, index) {
+                  final item = historyResult[index];
+                  return ListTile(
+                    title: Text(item),
+                    trailing: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          historyResult.removeAt(index);
+                        });
+                      },
+                      icon: const Icon(
+                        Icons.delete_outline,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
     );
+  }
+
+  operation({required String operator}) {
+    int? firstNumber;
+    int? secondNumber;
+
+    if (controller1.text.isNotEmpty) {
+      firstNumber = int.parse(controller1.text);
+    }
+
+    if (controller2.text.isNotEmpty) {
+      secondNumber = int.parse(controller2.text);
+    }
+
+    if (firstNumber != null && secondNumber != null) {
+      setState(() {
+        switch (operator) {
+          case '+':
+            total = firstNumber! + secondNumber!;
+            historyResult.add(
+                'Hasil dari Hasil ${controller1.text} + ${controller2.text} = $total');
+            break;
+          case '-':
+            total = firstNumber! - secondNumber!;
+            historyResult.add(
+                'Hasil dari Hasil ${controller1.text} - ${controller2.text} = $total');
+            break;
+          case '*':
+            total = firstNumber! * secondNumber!;
+            historyResult.add(
+                'Hasil dari Hasil ${controller1.text} * ${controller2.text} = $total');
+            break;
+          case '/':
+            total = firstNumber! ~/ secondNumber!;
+            historyResult.add(
+                'Hasil dari Hasil ${controller1.text} / ${controller2.text} = $total');
+            break;
+          default:
+            total = null;
+        }
+      });
+    } else {
+      setState(() {
+        total = null;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please fill first and second number'),
+          duration: Duration(seconds: 1),
+        ),
+      );
+    }
   }
 }
