@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
     final darkTheme = AppDarkTheme();
     return MaterialApp(
       title: 'Flutter Demo',
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.light,
       theme: ThemeData(
         brightness: Brightness.light,
         primarySwatch: lightTheme.primarySwatch,
@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         floatingActionButtonTheme: darkTheme.floatingActionButtonTheme,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/shoppingDetail',
+      initialRoute: '/shopping',
       routes: {
         '/': (context) => const MyHomePage(title: 'Teks Title'),
         '/column': (context) => const ColumnScreen(),
@@ -63,7 +63,6 @@ class MyApp extends StatelessWidget {
         '/safetyNull': (context) => NullAwareScreen(),
         '/calculator': (context) => const CalculatorScreen(),
         '/shopping': (context) => const ShoppingListScreen(),
-        '/shoppingDetail': (context) => const ShoppingDetailScreen(),
       },
     );
   }

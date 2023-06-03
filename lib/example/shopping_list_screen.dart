@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ki_flutter_2023/example/shopping_detail_screen.dart';
+import 'package:ki_flutter_2023/example/shopping_form.dart';
+import 'package:ki_flutter_2023/model/item.dart';
 
 class ShoppingListScreen extends StatefulWidget {
   const ShoppingListScreen({super.key});
@@ -9,7 +12,12 @@ class ShoppingListScreen extends StatefulWidget {
 
 class _ShoppingListScreenState extends State<ShoppingListScreen> {
   final controller = TextEditingController();
-  List<String> shopItems = [];
+  List<Item> shopItems = [];
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,33 +27,6 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
       ),
       body: Column(
         children: [
-          Container(
-            margin: const EdgeInsets.all(8),
-            child: TextField(
-              controller: controller,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Enter your items',
-                hintText: 'Fill here',
-                prefixIcon: Icon(Icons.shopping_bag_outlined),
-              ),
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            height: 45,
-            margin: const EdgeInsets.symmetric(horizontal: 8),
-            child: ElevatedButton(
-              onPressed: () => add(controller.text),
-              child: const Text(
-                'Tambahkan',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
           Container(
             margin: const EdgeInsets.all(8),
             child: Row(
@@ -63,11 +44,43 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
               itemCount: shopItems.length,
               itemBuilder: (context, index) {
                 final item = shopItems[index];
-                return ListTile(
-                  title: Text(item),
-                  trailing: IconButton(
-                    onPressed: () => delete(idx: index),
-                    icon: const Icon(Icons.delete_outline),
+                return Card(
+                  elevation: 4,
+                  child: ListTile(
+                    title: Text(item.name),
+                    subtitle: Text(
+                      item.description,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(4),
+                      child: Image(
+                        fit: BoxFit.cover,
+                        width: 50,
+                        height: 50,
+                        image: NetworkImage(item.imageURL),
+                      ),
+                    ),
+                    trailing: IconButton(
+                      onPressed: () => delete(idx: index),
+                      icon: const Icon(Icons.delete_outline),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ShoppingDetailScreen(
+                            data: item,
+                            onDataReceived: (data) {
+                              setState(() {
+                                shopItems[index] = data;
+                              });
+                            },
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 );
               },
@@ -75,17 +88,27 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            useSafeArea: true,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            builder: (context) {
+              return ShoppingForm(onDataReceived: (data) {
+                setState(() {
+                  shopItems.add(data);
+                });
+              });
+            },
+          );
+        },
+        child: const Icon(Icons.add),
+      ),
     );
-  }
-
-  void add(String item) {
-    if (item.isEmpty) {
-      showAlert(message: 'Please fill item first');
-    } else {
-      setState(() {
-        shopItems.add(item);
-      });
-    }
   }
 
   void delete({int? idx}) {
