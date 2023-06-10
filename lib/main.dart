@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ki_flutter_2023/auth/login_screen.dart';
 import 'package:ki_flutter_2023/auth/register_screen.dart';
+import 'package:ki_flutter_2023/auth/splash_screen.dart';
 import 'package:ki_flutter_2023/example/button_screen.dart';
 import 'package:ki_flutter_2023/example/calculator_screen.dart';
 import 'package:ki_flutter_2023/example/column_screen.dart';
@@ -8,6 +9,7 @@ import 'package:ki_flutter_2023/example/components/app_theme.dart';
 import 'package:ki_flutter_2023/example/custom_screen.dart';
 import 'package:ki_flutter_2023/example/field_screen.dart';
 import 'package:ki_flutter_2023/example/grid_screen.dart';
+import 'package:ki_flutter_2023/example/hello_screen.dart';
 import 'package:ki_flutter_2023/example/image_screen.dart';
 import 'package:ki_flutter_2023/example/list+style_screen.dart';
 import 'package:ki_flutter_2023/example/list_view_screen.dart';
@@ -46,9 +48,10 @@ class MyApp extends StatelessWidget {
         floatingActionButtonTheme: darkTheme.floatingActionButtonTheme,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/shopping',
+      initialRoute: '/',
       routes: {
-        '/': (context) => const MyHomePage(title: 'Teks Title'),
+        '/': (context) => const SplashScreen(),
+        '/myHome': (context) => const MyHomePage(title: 'Teks Title'),
         '/column': (context) => const ColumnScreen(),
         '/row': (context) => const RowScreen(),
         '/image': (context) => const ImageScreen(),
@@ -63,6 +66,7 @@ class MyApp extends StatelessWidget {
         '/safetyNull': (context) => NullAwareScreen(),
         '/calculator': (context) => const CalculatorScreen(),
         '/shopping': (context) => const ShoppingListScreen(),
+        '/hello': (context) => const HelloScreen(),
       },
     );
   }
