@@ -12,10 +12,10 @@ import 'package:ki_flutter_2023/example/grid_screen.dart';
 import 'package:ki_flutter_2023/example/hello_screen.dart';
 import 'package:ki_flutter_2023/example/image_screen.dart';
 import 'package:ki_flutter_2023/example/list+style_screen.dart';
+import 'package:ki_flutter_2023/example/list_person_screen.dart';
 import 'package:ki_flutter_2023/example/list_view_screen.dart';
 import 'package:ki_flutter_2023/example/null_aware_screen.dart';
 import 'package:ki_flutter_2023/example/row_screen.dart';
-import 'package:ki_flutter_2023/example/shopping_detail_screen.dart';
 import 'package:ki_flutter_2023/example/shopping_list_screen.dart';
 
 void main() {
@@ -67,6 +67,7 @@ class MyApp extends StatelessWidget {
         '/calculator': (context) => const CalculatorScreen(),
         '/shopping': (context) => const ShoppingListScreen(),
         '/hello': (context) => const HelloScreen(),
+        '/listPerson': (context) => const ListPersonScreen(),
       },
     );
   }

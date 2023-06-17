@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -66,7 +67,11 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 45,
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  const storage = FlutterSecureStorage();
+                  await storage.write(key: 'id', value: '1');
+                  Navigator.pushReplacementNamed(context, '/shopping');
+                },
                 child: const Text('Login'),
               ),
             ),

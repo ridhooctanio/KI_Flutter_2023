@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -12,10 +13,20 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
+    checkState();
+  }
+
+  Future<void> checkState() async {
+    const storage = FlutterSecureStorage();
+    String id = await storage.read(key: 'id') ?? '';
     Future.delayed(
       const Duration(seconds: 3),
       () {
-        Navigator.pushReplacementNamed(context, '/hello');
+        if (id.isNotEmpty) {
+          Navigator.pushReplacementNamed(context, '/listPerson');
+        } else {
+          Navigator.pushReplacementNamed(context, '/login');
+        }
       },
     );
   }
