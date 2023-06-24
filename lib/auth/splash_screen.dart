@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
       const Duration(seconds: 3),
       () {
         if (id.isNotEmpty) {
-          Navigator.pushReplacementNamed(context, '/listPerson');
+          Navigator.pushReplacementNamed(context, '/shopping');
         } else {
           Navigator.pushReplacementNamed(context, '/login');
         }

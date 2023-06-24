@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ki_flutter_2023/example/components/extension.dart';
 import 'package:ki_flutter_2023/model/item.dart';
 
 class ShoppingForm extends StatefulWidget {
@@ -108,7 +109,7 @@ class _ShoppingFormState extends State<ShoppingForm> {
       return;
     }
 
-    if (!isURLValid(imageController.text)) {
+    if (!imageController.text.isURLValid()) {
       showAlert(context: context, message: 'URL Gambar tidak valid');
       return;
     }
@@ -129,16 +130,6 @@ class _ShoppingFormState extends State<ShoppingForm> {
 
     widget.onDataReceived(data!);
     Navigator.of(context).pop();
-  }
-
-  bool isURLValid(String urlString) {
-    final regex = RegExp(
-      r'^(http(s)?:\/\/)?(www\.)?[a-zA-Z0-9-_\.]+(\.[a-zA-Z]{2,})(:\d{1,5})?(\/\S*)?$',
-      caseSensitive: false,
-      multiLine: false,
-    );
-
-    return regex.hasMatch(urlString);
   }
 
   void showAlert({required BuildContext context, required String message}) {
