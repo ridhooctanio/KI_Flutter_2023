@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:ki_flutter_2023/example/shopping_form.dart';
 import 'package:ki_flutter_2023/model/item.dart';
@@ -31,8 +33,10 @@ class _ShoppingDetailScreenState extends State<ShoppingDetailScreen> {
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
-            child: Image(
-              image: NetworkImage(data?.imageURL ?? ''),
+            child: Image.file(
+              File(data?.image ?? ''),
+              height: 300,
+              fit: BoxFit.cover,
             ),
           ),
           SliverToBoxAdapter(

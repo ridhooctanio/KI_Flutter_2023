@@ -1,16 +1,16 @@
 class Item {
   String name;
   String description;
-  String imageURL;
+  String image;
 
-  Item({required this.name, required this.description, required this.imageURL});
+  Item({required this.name, required this.description, required this.image});
 
   setData(
       {required String name,
       required String description,
-      required String imageURL}) {
+      required String image}) {
     this.name = name;
     this.description = description;
-    this.imageURL = imageURL;
+    this.image = image;
   }
 }

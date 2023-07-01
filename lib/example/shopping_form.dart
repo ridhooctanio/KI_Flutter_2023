@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:ki_flutter_2023/example/components/extension.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:ki_flutter_2023/model/item.dart';
 
 class ShoppingForm extends StatefulWidget {
@@ -15,16 +18,16 @@ class ShoppingForm extends StatefulWidget {
 class _ShoppingFormState extends State<ShoppingForm> {
   final nameController = TextEditingController();
   final descController = TextEditingController();
-  final imageController = TextEditingController();
 
   Item? data;
+  String _imagePath = '';
 
   @override
   void initState() {
     data = widget.data;
     nameController.text = data?.name ?? '';
     descController.text = data?.description ?? '';
-    imageController.text = data?.imageURL ?? '';
+    _imagePath = data?.image ?? '';
     super.initState();
   }
 
@@ -67,12 +70,42 @@ class _ShoppingFormState extends State<ShoppingForm> {
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 8)),
           SliverToBoxAdapter(
-            child: TextField(
-              controller: imageController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'URL Gambar',
-              ),
+            child: Column(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Visibility(
+                    visible: _imagePath.isNotEmpty,
+                    child: Image.file(
+                      File(_imagePath),
+                      width: 100,
+                      height: 100,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                const Text(
+                  'Ambil Gambar Dari ...',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () => _pickImage(ImageSource.camera),
+                      child: const Text('Kamera'),
+                    ),
+                    const SizedBox(width: 8),
+                    ElevatedButton(
+                      onPressed: () => _pickImage(ImageSource.gallery),
+                      child: const Text('Galeri'),
+                    )
+                  ],
+                )
+              ],
             ),
           ),
           const SliverToBoxAdapter(
@@ -104,13 +137,8 @@ class _ShoppingFormState extends State<ShoppingForm> {
       return;
     }
 
-    if (imageController.text.isEmpty) {
+    if (_imagePath.isEmpty) {
       showAlert(context: context, message: 'Gambar tidak boleh kosong');
-      return;
-    }
-
-    if (!imageController.text.isURLValid()) {
-      showAlert(context: context, message: 'URL Gambar tidak valid');
       return;
     }
 
@@ -118,13 +146,13 @@ class _ShoppingFormState extends State<ShoppingForm> {
       data = Item(
         name: nameController.text,
         description: descController.text,
-        imageURL: imageController.text,
+        image: _imagePath,
       );
     } else {
       data?.setData(
         name: nameController.text,
         description: descController.text,
-        imageURL: imageController.text,
+        image: _imagePath,
       );
     }
 
@@ -148,5 +176,19 @@ class _ShoppingFormState extends State<ShoppingForm> {
         );
       },
     );
+  }
+
+  Future _pickImage(ImageSource source) async {
+    try {
+      final picker = ImagePicker();
+      final pickedFile = await picker.pickImage(source: source);
+      if (pickedFile != null) {
+        setState(() {
+          _imagePath = pickedFile.path;
+        });
+      }
+    } on PlatformException catch (e) {
+      debugPrint("Failed to pick image: $e");
+    }
   }
 }

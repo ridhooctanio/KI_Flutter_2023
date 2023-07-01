@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:ki_flutter_2023/example/shopping_detail_screen.dart';
 import 'package:ki_flutter_2023/example/shopping_form.dart';
@@ -17,20 +19,6 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
   @override
   void initState() {
     super.initState();
-
-    final data1 = Item(
-        name: 'Sawi',
-        description:
-            'Sawi adalah sekelompok tumbuhan dari genus Brassica yang dimanfaatkan daun atau bunganya sebagai bahan pangan, baik segar maupun diolah. Sawi mencakup beberapa spesies Brassica yang kadang-kadang mirip satu sama lain. Di Indonesia penyebutan sawi biasanya mengacu pada sawi hijau.',
-        imageURL:
-            'https://dispertan.semarangkota.go.id/induk/uploads/2022/06/sawi.jpg');
-    final data2 = Item(
-        name: 'Seledri',
-        description:
-            'Seledri adalah sayuran daun dan tumbuhan obat yang biasa digunakan sebagai bumbu masakan. Beberapa negara termasuk Jepang, Cina dan Korea mempergunakan bagian tangkai daun sebagai bahan makanan.',
-        imageURL:
-            'https://www.eatingwell.com/thmb/Rj3KWSVbngEGz2nORhX4U2jrAFM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/is-celery-good-for-you-heres-what-an-rd-says-1187b6f3415b4c03b37900ccc4378c13.jpg');
-    shopItems.addAll([data1, data2]);
   }
 
   @override
@@ -94,11 +82,11 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
                     ),
                     leading: ClipRRect(
                       borderRadius: BorderRadius.circular(4),
-                      child: Image(
-                        fit: BoxFit.cover,
+                      child: Image.file(
+                        File(item.image),
                         width: 50,
                         height: 50,
-                        image: NetworkImage(item.imageURL),
+                        fit: BoxFit.cover,
                       ),
                     ),
                     trailing: IconButton(
